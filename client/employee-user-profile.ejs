@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link rel="stylesheet" href="CSS/style-profile.css">
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="Resourses/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Confirm-block -->
+    <div class="confirm-window confirm-window-hidden" id="confirm-window">
+        <div class="confirm-window-title">
+            <span>Вы уверены?</span>
+        </div>
+
+        <div class="confirm-window-buttons">
+            <button class="confirm-window-button" type="submit">Отмена</button>
+            <button class="confirm-window-button" type="submit">Да</button>
+        </div>
+    </div>
+
+    <!-- Alert-block -->
+    <div class="alert-window alert-window-hidden" id="alert-window">
+        <div class="alert-window-title">
+            <span>Заполните данные</span>
+        </div>
+
+        <div class="alert-window-buttons">
+            <button class="alert-window-button" type="submit">Ок</button>
+        </div>
+    </div>
+    
+    <!-- Sidebar menu -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-img">
+                <img src="Resourses/icon.png">
+            </div>
+            <div class="brand-name">
+                <span>Skeinc</span>
+            </div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+
+        <ul class="sidebar-list">
+            <li>
+                <a href="/personal">
+                    <i class='bx bx-user'></i>
+                    <span class="sidebar-link-name">Профиль</span>
+                </a>
+                    <span class="tooltip">Профиль</span>
+            </li>
+            <%if(user.role=="Администратор"||user.role=="Редактор"){%>
+                <li>
+                    <a href="/projects">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="sidebar-link-name">Проекты</span>
+                    </a>
+                    <span class="tooltip">Проекты</span>
+                </li>
+           <%}%>
+            <li>
+                <a href="/news">
+                    <i class='bx bx-news' ></i>
+                    <span class="sidebar-link-name">Новости</span>
+                </a>
+                <span class="tooltip">Новости</span>
+            </li>
+
+            <li>
+                <a href="/chats">
+                    <i class='bx bx-chat' ></i>
+                    <span class="sidebar-link-name">Чаты</span>
+                </a>
+                <span class="tooltip">Чаты</span>
+            </li>
+            <%if(user.role=="Администратор"){%>
+                <li>
+                    <a href="/analytics">
+                        <i class='bx bx-pie-chart-alt-2' ></i>
+                        <span class="sidebar-link-name">Аналитика</span>
+                    </a>
+                    <span class="tooltip">Аналитика</span>
+                </li>
+            <%}%>
+            <%if(user.role=="Администратор"||user.role=="Редактор"){%>
+                <li>
+                    <a href="/finances">
+                        <i class='bx bxs-wallet-alt' ></i>
+                        <span class="sidebar-link-name">Финансы</span>
+                    </a>
+                    <span class="tooltip">Финансы</span>
+                </li>
+           <%}%>
+            <li class="sidebar-profile">
+                <div class="sidebar-profile-details">
+                    <img src="/images:<%=user.avatar%>">
+                    <div class="sidebar-name-job">
+                        <div class="sidebar-name">
+                            <span><%=user.fio%></span>
+                        </div>
+                        <div class="sidebar-job">
+                            <span><%=user.role%></span>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="/logout" method="get">
+                    <button type="submit"><i class='bx bx-log-out' id="log_out" ></i></button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Home-section -->
+    <section class="home-section">
+        <!-- Menu -->
+        <div class="profile-menu">
+            <div class="profile-menu-brand">
+                <a href="/">
+                    <img src="Resourses/icon.png">
+                    <span>Skeinc</span>
+                </a>
+            </div>
+        </div>
+        <!-- Profile -->
+        <section class="section" id="margin-menu">
+            <div class="profile">
+                <div class="profile-row">
+                    <div class="profile-cart">
+                        <div class="profile-cart-photo">
+                            <img src="/images:<%=user.avatar%>">
+                        </div>
+    
+                        <div class="profile-cart-information">
+                            <div class="profile-cart-user-id">
+                                <span><%=user.id%></span>
+                            </div>
+
+                            <div class="profile-cart-company-id">
+                                <span><%=user.company_id%></span>
+                            </div>
+
+                            <div class="profile-cart-user-name">
+                                <span><%=user.fio%></span>
+                            </div>
+    
+                            <div class="profile-cart-user-post">
+                                <span><%=user.post%></span>
+                            </div>
+
+                            <div class="profile-cart-user-address">
+                                <span><%=user.address%></span>
+                            </div>
+
+                            <form enctype="multipart/form-data" method="post" action="/addAvatar">
+                                <div class="profile-cart-user-load-file">
+                                    <label for="load-file" class="load-file-label">Выберите файл</label>
+                                    <input type="file" name="image" multiple accept="image/*,image/jpeg" id="load-file" multiple>
+                                    <button type="submit"><i class='bx bx-upload'></i></button>
+                                </div>
+                            </form>
+    
+                            <div class="profile-cart-user-button">
+                                <form action="/logout" method="get">
+                                    <input type="submit" value="Выйти">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-information">
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Полное имя</span>
+                            <input type="text" class="profile-information-field-text" name="userName" value="<%=user.fio%>" readonly>
+                        </div>
+    
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Email</span>
+                            <input type="text" class="profile-information-field-text" name="userEmail" value="<%=user.email%>" readonly>
+                        </div>
+    
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Телефон</span>
+                            <input type="text" class="profile-information-field-text" name="userPhone" value="<%=user.phone%>" readonly>
+                        </div>
+    
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Адрес</span>
+                            <input type="text" class="profile-information-field-text" name="userAddress" value="<%=user.address%>" readonly>
+                        </div>
+
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Должность</span>
+                            <input type="text" class="profile-information-field-text-readonly" name="userPost" value="<%=user.post%>" readonly>
+                        </div>
+
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Номер карты</span>
+                            <input type="text" class="profile-information-field-text" name="userCard" value="<%=user.card%>" readonly>
+                        </div>
+                        
+                        <div class="profile-information-button">
+                            <input class="profile-information-button-edit" type="submit" value="Редактировать">
+                            <input class="profile-information-button-save" type="submit" value="Сохранить">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-job">
+                    <div class="profile-job-company">
+                        <span class="profile-job-text"><%=company.company_name%></span>
+                        <span class="profile-job-title">Компания</span>
+                    </div>
+
+                    <div class="profile-job-salary">
+                        <span class="profile-job-text"><%=(user.salary||'-')%><i class='bx bx-ruble'></i></span>
+                        <span class="profile-job-title">Зарплата</span>
+                    </div>
+
+                    <div class="profile-job-post">
+                        <span class="profile-job-text"><%=user.role%></span>
+                        <span class="profile-job-title">Роль</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- job-manager -->
+        <section class="section">
+            <div class="container-center">
+                <div class="job-manager">
+                    <div class="job-manager-header">
+                        <div class="job-manager-header-title">
+                            <span>Работа</span>
+                        </div>
+                    </div>
+
+                    <div class="job-manager-status"><%=isWorkerStarted%></div>
+                    <div class="job-manager-custom-task-status"><%=customTask%></div>
+
+                    <div class="job-manager-controller">
+                            <button type="submit" class="job-manager-start-button">Начать рабочий день</button>
+                            <button type="submit" class="job-manager-end-button">Завершить рабочий день</button>
+                    </div>
+
+                    <div class="job-manager-in-progress-task-items">
+                        <div class="job-manager-task-title">
+                            <span>В процессе</span>
+                        </div>
+
+                        <div class="job-manager-task-empty">
+                            <span>Задачи не выбраны</span>
+                        </div>
+                        
+                        <!-- task-in-progress-list -->
+                        <div class="job-manager-task-list job-manager-in-progress-task-list">
+                            <%tasks.forEach(({dataValues:{task_id,task_name,task_description,task_date,task_priority,task_status,projectTasks:{dataValues:{project_status}}}}) =>{%>
+                                 <!-- task-in-progress-item -->
+                                <%if((task_status=="In Progress")&&(project_status!="Done")){%>
+                                    <div class="job-manager-task-item job-manager-task-item-in-progress">
+                                        <div class="job-manager-task-item-id">
+                                            <span><%=task_id%></span>
+                                        </div>
+            
+                                        <div class="job-manager-task-item-title">
+                                            <span><%=task_name%></span>
+                                        </div>
+            
+                                        <div class="job-manager-task-item-description">
+                                            <span><%=task_description%></span>
+                                        </div>
+        
+                                        <div class="job-manager-task-item-employee">
+                                            <img src="/images:<%=user.avatar%>">
+                                            <span><%=user.fio%></span>
+                                        </div>
+            
+                                        <div class="job-manager-task-item-info">
+                                            <span class="job-manager-task-item-date"><%=task_date%></span>
+                                            <span class="job-manager-task-item-status"><%=task_priority%></span>
+                                        </div>
+        
+                                        <div class="job-manager-task-item-button">
+                                            <button class="job-manager-task-button-check" type="submit">На проверку</button>
+                                        </div>
+                                    </div>
+                                <%}%>
+                            <%})%>
+                        </div>
+                    </div>
+
+                    <div class="job-manager-unselected-task-items">
+                        <div class="job-manager-task-title">
+                            <span>Невыбранные задачи</span>
+                        </div>
+
+                        <div class="job-manager-task-empty">
+                            <span>Задач нет</span>
+                        </div>
+                        
+                        <!-- task-unselected-list -->
+                        <div class="job-manager-task-list job-manager-unselected-task-list">
+                            <!-- task-unselected-item -->
+                            <%tasks.forEach(({dataValues:{task_id,task_name,task_description,task_date,task_priority,task_status,projectTasks:{dataValues:{project_status}}}}) =>{%>
+                               <%if((task_status=="Task Ready")&&(project_status!="Done")){%>
+                                   <div class="job-manager-task-item job-manager-task-item-unselected">
+                                       <div class="job-manager-task-item-id">
+                                           <span><%=task_id%></span>
+                                       </div>
+           
+                                       <div class="job-manager-task-item-title">
+                                           <span><%=task_name%></span>
+                                       </div>
+           
+                                       <div class="job-manager-task-item-description">
+                                           <span><%=task_description%></span>
+                                       </div>
+       
+                                       <div class="job-manager-task-item-employee">
+                                           <img src="/images:<%=user.avatar%>">
+                                           <span><%=user.fio%></span>
+                                       </div>
+           
+                                       <div class="job-manager-task-item-info">
+                                           <span class="job-manager-task-item-date"><%=task_date%></span>
+                                           <span class="job-manager-task-item-status"><%=task_priority%></span>
+                                       </div>
+       
+                                       <div class="job-manager-task-item-button">
+                                        <button class="job-manager-task-button-select" type="submit">Взять</button>
+                                    </div>
+                                   </div>
+                               <%}%>
+                           <%})%>
+                        </div>
+                    </div>
+
+                    <div class="job-manager-pick-task">
+                        <div class="job-manager-pick-task-title">
+                            <span>Выберите себе задачу: </span>
+                        </div>
+
+                        <div class="job-manager-pick-task-form">
+                            <div class="select-area select-job-manager-pick-task" id="select-job-manager-pick-task">
+                                <div class="select-field">
+                                    <span>Выберите задачу</span>
+                                    <i class='bx bxs-chevron-down' ></i>
+                                </div>
+    
+                                <div class="select-content non-active-select">
+                                    <div class="select-items">
+                                        <%filters.forEach(({dataValues:{filter_id,filter_name}})=>{%>
+                                            <div class="select-item">
+                                                <span><%=filter_name%></span>
+                                            </div>
+                                        <%})%>
+                                        <div class="select-item">
+                                            <span>Другое</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-field pick-task-input">
+                                <input type="text" name="taskTitle" required>
+                                <span></span>
+                                <label>Название задачи</label>
+                            </div>
+    
+                            <div class="input-buttons">
+                                <button class="job-manager-pick-task-button" type="submit">Выбрать</button>
+                                <button class="job-manager-finish-task-button" type="submit">Завершить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section> 
+
+    <!-- JS -->
+    <script src="JS/profile/employeeTimeManager.js"></script>
+    <script src="JS/profile/updateEmployeeData.js"></script>
+    <script src="JS/main/sidebar.js"></script>
+</body>
+</html>

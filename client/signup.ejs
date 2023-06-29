@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeinc</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="CSS/style-authorization.css">
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="Resourses/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="registration">
+            <div class="registration-form">
+                <div class="choose-post">
+                    <div class="choose-post-title">
+                        <span>Выберите роль в компании</span>
+                    </div>
+                    <div class="post-list">
+                        <div class="post-admin">
+                            <div class="post-user-title">
+                                <span>Администратор</span>
+                            </div>
+    
+                            <div class="post-user-img">
+                                <img src="Resourses/administrator.png">
+                            </div>
+    
+                            <div class="post-user-text" id="choose-post-admin">
+                                <span>Click me</span>
+                            </div>
+                        </div>
+    
+                        <div class="post-employee">
+                            <div class="post-user-title">
+                                <span>Сотрудник</span>
+                            </div>
+    
+                            <div class="post-user-img">
+                                <img src="Resourses/employee.png">
+                            </div>
+    
+                            <div class="post-user-text" id="choose-post-employee">
+                                <span>Click me</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="request">
+                        <div class="request-success">   
+                            <% if(success){%>
+                                <span><%=success%></span>
+                                <%}%>
+                        </div>
+                        <div class="request-error">
+                            <% if(failer){%>
+                                <span><%=failer%></span>
+                                <%}%>
+                        </div>
+                    </div>
+
+                    <div class="registration-button">
+                        <a href="/signin">Назад</a>
+                    </div>
+                </div>
+
+                <form action="/addAdmin" method="post" class="admin-form" id="hidden-block">
+                    <div class="admin-form-user" id="hidden-block">
+                        <div class="registration-form-title">
+                            <span>Регистрация</span>
+                        </div>
+    
+                        <div class="registration-form-list">
+                            <div class="registration-form-left">
+                                <div class="input-field">
+                                    <input type="text" name="fio" minlength="3" maxlength="255"  required>
+                                    <span></span>
+                                    <label>ФИО</label>
+                                </div>
+                
+                                <div class="input-field">
+                                    <input type="email" name="email" minlength="3" maxlength="255"  required>
+                                    <span></span>
+                                    <label>Email</label>
+                                </div>
+    
+                                <div class="input-field">
+                                    <input type="tel" name="phone" minlength="11" required>
+                                    <span></span>
+                                    <label>Телефон</label>
+                                </div>
+                            </div>
+        
+                            <div class="registration-form-right">
+                                <div class="input-field">
+                                    <input type="text" name="login" minlength="3" maxlength="45"  required>
+                                    <span></span>
+                                    <label>Логин</label>
+                                </div>
+                
+                                <div class="input-field">
+                                    <input type="password" name="password" minlength="5" maxlength="45"  required>
+                                    <span></span>
+                                    <label>Пароль</label>
+                                </div>
+    
+                                <div class="input-field">
+                                    <input type="password" name="confirm_password" minlength="5" maxlength="45"  required>
+                                    <span></span>
+                                    <label>Подтвердите пароль</label>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="registration-button">
+                            <span id="backBtnReg">Назад</span>
+                            <button id="nextRegComp">Далее</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-form-company" id="hidden-block">
+                        <div class="registration-form-title">
+                            <span>Регистрация компании</span>
+                        </div>
+    
+                        <div class="registration-form-list">
+                            <div class="registration-form-left">
+                                <div class="input-field">
+                                    <input type="text" name="company_name" minlength="1" maxlength="255"  required>
+                                    <span></span>
+                                    <label>Название компании</label>
+                                </div>
+                
+                                <div class="input-field">
+                                    <input type="text" name="company_address" minlength="5" maxlength="255" required>
+                                    <span></span>
+                                    <label>Адрес компании</label>
+                                </div>
+    
+                                <div class="input-field">
+                                    <input type="tel" name="company_phone" minlength="7" maxlength="255"  required>
+                                    <span></span>
+                                    <label>Телефон компании</label>
+                                </div>
+                            </div>
+        
+                            <div class="registration-form-right">
+                                <div class="input-field">
+                                    <input type="email" name="company_email" minlength="8" maxlength="255"  required>
+                                    <span></span>
+                                    <label>Email</label>
+                                </div>
+
+                                <div class="input-field">
+                                    <input type="text" name="code" required readonly id="code-field">
+                                    <span></span>
+                                    <label id="code-label">Invite-code</label>
+                                    <img onclick="CopyCode()" src="Resourses/copy-icon.png" alt="Скопировать">
+                                </div>
+
+                                <div class="code-button">
+                                    <span id="generate-code" onclick="rndCode()">Сгенерировать</span>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="registration-button">
+                            <span id="backBtnAdmin">Назад</span>
+                            <input type="submit" value="Создать">
+                        </div>
+                    </div>
+                </form>
+
+                <form action="/addUser" method="post" class="employee-form" id="hidden-block">
+                    <div class="employee-form-user">
+                        <div class="registration-form-title">
+                            <span>Регистрация</span>
+                        </div>
+    
+                        <div class="registration-form-list">
+                            <div class="registration-form-left">
+                                <div class="input-field">
+                                    <input type="text" name="fio" minlength="3" maxlength="255" required>
+                                    <span></span>
+                                    <label>ФИО</label>
+                                </div>
+                
+                                <div class="input-field">
+                                    <input type="email" name="email" minlength="8" required>
+                                    <span></span>
+                                    <label>Email</label>
+                                </div>
+    
+                                <div class="input-field">
+                                    <input type="tel" name="phone" minlength="11" required>
+                                    <span></span>
+                                    <label>Телефон</label>
+                                </div>
+                            </div>
+        
+                            <div class="registration-form-right">
+                                <div class="input-field">
+                                    <input type="text" name="login" minlength="3" maxlength="45" required>
+                                    <span></span>
+                                    <label>Логин</label>
+                                </div>
+                
+                                <div class="input-field">
+                                    <input type="password" name="password" minlength="5" maxlength="45" required>
+                                    <span></span>
+                                    <label>Пароль</label>
+                                </div>
+    
+                                <div class="input-field">
+                                    <input type="password" name="confirm_password" minlength="5" maxlength="45" required>
+                                    <span></span>
+                                    <label>Подтвердите пароль</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="registration-form-center">
+                            <div class="input-field">
+                                <input type="text" name="code" required>
+                                <span></span>
+                                <label>Invite-code</label>
+                            </div>
+                        </div>
+
+                        <div class="request">
+                            <div class="request-success">   
+                                <% if(success){%>
+                                    <span><%=success%></span>
+                                    <%}%>
+                            </div>
+                            <div class="request-error">
+                                <% if(failer){%>
+                                    <span><%=failer%></span>
+                                    <%}%>
+                            </div>
+                        </div>
+        
+                        <div class="registration-button">
+                            <span id="backBtnRegEmp">Назад</span>
+                            <input type="submit" value="Создать">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="JS/registration/reg.js"></script>
+    <script src="JS/registration/generate-code.js"></script>
+</body>
+</html>

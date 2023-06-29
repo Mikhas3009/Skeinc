@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeinc</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="CSS/style-profile.css">
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="Resourses/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Confirm-block -->
+    <div class="confirm-window confirm-window-hidden" id="confirm-window">
+        <div class="confirm-window-title">
+            <span>Вы уверены?</span>
+        </div>
+
+        <div class="confirm-window-buttons">
+            <button class="confirm-window-button" type="submit">Отмена</button>
+            <button class="confirm-window-button" type="submit">Да</button>
+        </div>
+    </div>
+
+    <!-- Alert-block -->
+    <div class="alert-window alert-window-hidden" id="alert-window">
+        <div class="alert-window-title">
+            <span>Заполните данные</span>
+        </div>
+
+        <div class="alert-window-buttons">
+            <button class="alert-window-button" type="submit">Ок</button>
+        </div>
+    </div>
+    <!-- Sidebar menu -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-img">
+                <img src="Resourses/icon.png">
+            </div>
+            <div class="brand-name">
+                <span>Skeinc</span>
+            </div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+
+        <ul class="sidebar-list">
+            <li>
+                <a href="/personal">
+                    <i class='bx bx-user'></i>
+                    <span class="sidebar-link-name">Профиль</span>
+                </a>
+                    <span class="tooltip">Профиль</span>
+            </li>
+
+            <li>
+              <a href="/projects">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="sidebar-link-name">Проекты</span>
+                </a>
+                <span class="tooltip">Проекты</span>
+            </li>
+
+            <li>
+                <a href="/news">
+                    <i class='bx bx-news' ></i>
+                    <span class="sidebar-link-name">Новости</span>
+                </a>
+                <span class="tooltip">Новости</span>
+            </li>
+
+            <li>
+                <a href="/chats">
+                    <i class='bx bx-chat' ></i>
+                    <span class="sidebar-link-name">Чаты</span>
+                </a>
+                <span class="tooltip">Чаты</span>
+            </li>
+
+            <li>
+                <a href="/analytics">
+                    <i class='bx bx-pie-chart-alt-2' ></i>
+                    <span class="sidebar-link-name">Аналитика</span>
+                </a>
+                <span class="tooltip">Аналитика</span>
+            </li>
+
+            <li>
+                <a href="/finances">
+                    <i class='bx bxs-wallet-alt' ></i>
+                    <span class="sidebar-link-name">Финансы</span>
+                </a>
+                <span class="tooltip">Финансы</span>
+            </li>
+           
+            <li class="sidebar-profile">
+                <div class="sidebar-profile-details">
+                        <img src="/images:<%=user.avatar%>">
+                    <div class="sidebar-name-job">
+                        <div class="sidebar-name">
+                            <span><%=user.fio%></span>
+                        </div>
+                        <div class="sidebar-job">
+                            <span><%=user.role%></span>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="/logout" method="get">
+                    <button type="submit"><i class='bx bx-log-out' id="log_out" ></i></button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Home-section -->
+    <section class="home-section">
+        <!-- Menu -->
+        <div class="profile-menu">
+            <div class="profile-menu-brand">
+                <a href="/">
+                    <img src="Resourses/icon.png">
+                    <span>Skeinc</span>
+                </a>
+            </div>
+        </div>
+        <!-- Profile -->
+        <section class="section" id="margin-menu">
+            <div class="profile">
+                <div class="profile-row">
+                    <div class="profile-cart">
+                        <div class="profile-cart-photo">
+                            <img src="/images:<%=user.avatar%>">
+                        </div>
+    
+                        <div class="profile-cart-information">
+                            <div class="profile-cart-user-name">
+                                <span><%=user.fio%></span>
+                            </div>
+    
+                            <div class="profile-cart-user-post">
+                                <span><%=user.post%></span>
+                            </div>
+
+                            <div class="profile-cart-user-address">
+                                <span><%=user.address%></span>
+                            </div>
+
+                            <form enctype="multipart/form-data" method="post" action="/addAvatar">
+                                <div class="profile-cart-user-load-file">
+                                    <label for="load-file" class="load-file-label">Выберите файл</label>
+                                    <input type="file" name="image" multiple accept="image/*,image/jpeg" id="load-file" multiple>
+                                    <button type="submit"><i class='bx bx-upload'></i></button>
+                                </div>
+                            </form>
+    
+                            <div class="profile-cart-user-button">
+                                <form action="/logout" method="get">
+                                    <input type="submit" value="Выйти">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-information">
+                        <div class="profile-cart-user-id">
+                            <span><%=user.id%></span>
+                        </div>
+
+                        <div class="profile-cart-company-id">
+                            <span><%=user.company_id%></span>
+                        </div>
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Полное имя</span>
+                            <input type="text" class="profile-information-field-text" name="userName" value="<%=user.fio%>" readonly>
+                        </div>
+    
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Email</span>
+                            <input type="text" class="profile-information-field-text" name="userEmail" value="<%=user.email%>" readonly>
+                        </div>
+    
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Телефон</span>
+                            <input type="text" class="profile-information-field-text" name="userPhone" value="<%=user.phone%>" readonly>
+                        </div>
+    
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Адрес</span>
+                            <input type="text" class="profile-information-field-text" name="userAddress" value="<%=user.address%>" readonly>
+                        </div>
+
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Должность</span>
+                            <input type="text" class="profile-information-field-text" name="userPost" value="<%=user.post%>" readonly>
+                        </div>
+
+                        <div class="profile-information-field">
+                            <span class="profile-information-field-title">Номер карты</span>
+                            <input type="text" class="profile-information-field-text" name="userCard" value="<%=user.card%>" readonly>
+                        </div>
+                        
+                        <div class="profile-information-button">
+                            <input class="profile-information-button-edit" type="submit" value="Редактировать">
+                            <input class="profile-information-button-save" type="submit" value="Сохранить">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-job">
+                    <div class="profile-job-company">
+                        <span class="profile-job-text"><%=company.company_name%></span>
+                        <span class="profile-job-title">Компания</span>
+                    </div>
+
+                    <div class="profile-job-salary">
+                        <span class="profile-job-text"><%=(user.salary||'-')%> <i class='bx bx-ruble'></i></span>
+                        <span class="profile-job-title">Зарплата</span>
+                    </div>
+
+                    <div class="profile-job-post">
+                        <span class="profile-job-text">Администратор</span>
+                        <span class="profile-job-title">Роль</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Employee-Manager -->
+        <section class="section" id="employee-manager">
+            <div class="container-center">
+                <div class="employee-manager">
+                    <div class="employee-manager-header">
+                        <div class="employee-manager-header-title">
+                            <span>Сотрудники компании</span>
+                        </div>
+    
+                        <div class="employee-manager-header-search">
+                            <input type="text" placeholder="Search...">
+                            <button><i class='bx bx-search' ></i></button>
+                        </div>
+                    </div>
+    
+                    <div class="employee-manager-dashboard">
+                        <div class="employee-manager-dashboard-columns">
+                            <span>Сотрудник</span>
+                            <span>Должность</span>
+                            <span>Зарплата</span>
+                            <span>Права</span>
+                            <span>Настройки</span>
+                        </div>
+
+                        <div class="employee-manager-dashboard-column">
+                            <span>Сотрудник /</span>
+                            <span>Должность /</span>
+                            <span>Зарплата /</span>
+                            <span>Права /</span>
+                            <span>Настройки /</span>
+                        </div>
+    
+                        <div class="employee-manager-dashboard-form">
+                                <div class="employee-manager-dashboard-form-items">
+                                    <% employees.forEach(({dataValues:{id,fio,post,salary,role,avatar}})=>{%>
+                                        <div class="employee-manager-dashboard-form-item">
+                                            <div class="employee-manager-dashboard-id">
+                                                <span><%=id%></span>
+                                            </div> 
+                                            <div class="employee-manager-dashboard-name">
+                                                <img src="/images:<%=avatar%>">
+                                                <span><%=fio%></span>
+                                            </div>
+            
+                                            <div class="employee-manager-dashboard-post">
+                                                <input type="text" value="<%=post%>" name="employee-post" readonly>
+                                            </div>
+            
+                                            <div class="employee-manager-dashboard-salary">
+                                                <input type="text" value="<%=salary%>" name="employee-name" readonly>
+                                            </div>
+            
+                                            <div class="employee-manager-dashboard-role">
+                                                <select name="employee-role" disabled>
+                                                    <%if(role=="Администратор"){%>
+                                                    <option value="Сотрудник">Сотрудник</option>
+                                                    <option value="Администратор"selected>Администратор</option>
+                                                    <option value="Редактор">Редактор</option>
+                                                    <%}%>
+                                                    <%if(role=="Сотрудник"){%>
+                                                        <option value="Сотрудник" selected>Сотрудник</option>
+                                                        <option value="Администратор">Администратор</option>
+                                                        <option value="Редактор">Редактор</option>
+                                                    <%}%>
+                                                    <%if(role=="Редактор"){%>
+                                                        <option value="Сотрудник">Сотрудник</option>
+                                                        <option value="Администратор">Администратор</option>
+                                                        <option value="Редактор" selected>Редактор</option>
+                                                    <%}%>
+                                                </select>
+                                            </div>
+        
+                                            <div class="employee-manager-dashboard-change-data">
+                                                <i class='bx bx-cog setting-icon' ></i>
+                                                <i class='bx bx-x delete-icon'></i>
+                                            </div>
+                                        </div>
+                                          
+
+                                        <%})%>
+
+                                    </div>
+                                </div>
+
+                                <div class="employee-manager-dashboard-button">
+                                    <input type="submit" value="Сохранить">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company-manager -->
+        <section class="section">
+            <div class="container-center">
+                <div class="company-manager">
+                    <div class="company-manager-header">
+                        <span>Настройки компании</span>
+                    </div>
+
+                    <div class="company-manager-items">
+                        <div class="company-manager-item">
+                            <div class="company-manager-item-field">
+                                <label for="CompanyName">Название</label>
+                                <input type="text" id="CompanyName" class="company-manager-item-input" name="CompanyName" value="<%=company.company_name%>" readonly>
+                                <div class="company-manager-change-data">
+                                    <i class='bx bx-cog' ></i>
+                                </div>
+                            </div>
+
+                            <div class="company-manager-item-field">
+                                <label for="CompanyAddress">Адрес</label>
+                                <input type="text" id="CompanyAddress" class="company-manager-item-input" name="CompanyAddress" value="<%=company.company_address%>" readonly>
+                                <div class="company-manager-change-data">
+                                    <i class='bx bx-cog' ></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="company-manager-item">
+                            <div class="company-manager-item-field">
+                                <label for="CompanyPhone">Телефон</label>
+                                <input type="text" id="CompanyPhone" class="company-manager-item-input" name="CompanyPhone" value="<%=company.company_phone%>" readonly>
+                                <div class="company-manager-change-data">
+                                    <i class='bx bx-cog' ></i>
+                                </div>
+                            </div>
+
+                            <div class="company-manager-item-field">
+                                <label for="CompanyEmail">Email</label>
+                                <input type="text" id="CompanyEmail" class="company-manager-item-input" name="CompanyEmail" value="<%=company.company_email%>" readonly>
+                                <div class="company-manager-change-data">
+                                    <i class='bx bx-cog' ></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="company-manager-code">
+                        <div class="company-manager-code-field">
+                            <label for="CompanyCode">Invite-code</label>
+                            <input type="text" id="CompanyCode" class="company-manager-code-input" name="CompanyCode" value="<%=company.code%>" readonly>
+                        </div>
+                    </div>
+
+                    <div class="company-manager-button">
+                        <input class="company-manager-button-save" type="submit" value="Сохранить">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container-center">
+                <div class="time-manager-filters">
+                    <div class="time-manager-filters-header">
+                        <div class="time-manager-filters-header-title">
+                            <span>Тайм-менеджер</span>
+                        </div>
+
+                        <div class="time-manager-filters-header-buttons">
+                            <span>Добавить категорию</span>
+                            <a href="#add-time-manager-filter"><i class='bx bx-plus'></i></a>
+                        </div>
+                    </div>
+
+                    <div class="time-manager-filters-empty">
+                        <span>Категории не добавлены</span>
+                    </div>
+                    
+                    <div class="time-manager-filters-items">
+                        <%filters.forEach(({dataValues:{filter_id,filter_name}})=>{%>
+                            <div class="time-manager-filters-item">
+                                <span class="time-manager-filters-item-id"><%=filter_id%></span>
+                                <i class='bx bx-x delete-icon-time-manager'></i>
+                                <span><%=filter_name%></span>
+                            </div>
+
+
+                        <%})%>
+                    </div>
+
+                    <div class="time-manager-filters-buttons">
+                        <button class="time-manager-filters-button-edit" type="submit">Редактировать</button>
+                        <button class="time-manager-filters-button-save" type="submit">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Time-manager-filter -->
+        <section class="section" id="add-time-manager-filter">
+            <div class="container-center">
+                <div class="add-time-manager-filter">
+                    <div class="add-time-manager-filters-header">
+                        <div class="add-time-manager-filters-header-title">
+                            <span>Новая категория</span>
+                        </div>
+                    </div>
+
+                    <div class="add-time-manager-filter-form">
+                        <div class="input-field">
+                            <input type="text" name="filterName" required>
+                            <span></span>
+                            <label>Название</label>
+                        </div>
+
+                        <div class="input-button">
+                            <input type="submit" value="Добавить">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </section>
+    
+    
+
+    <!-- JS -->
+    <script src="JS/main/sidebar.js"></script>
+    <script src="JS/main/scroll.js"></script>
+    <script src="JS/profile/updateEmployeesData.js"></script>
+    <script src="JS/profile/updateUserData.js"></script>
+    <script src="JS/profile/updateCompanyData.js"></script>
+    <script src="JS/profile/time-manager.js"></script>
+    <script src="JS/profile/addTimeManagerFilter.js"></script>
+</body>
+</html>

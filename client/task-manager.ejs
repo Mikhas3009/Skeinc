@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeinc</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="CSS/style-profile.css">
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="Resourses/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Confirm-block -->
+    <div class="confirm-window confirm-window-hidden" id="confirm-window">
+        <div class="confirm-window-title">
+            <span>Вы уверены?</span>
+        </div>
+
+        <div class="confirm-window-buttons">
+            <button class="confirm-window-button" type="submit">Отмена</button>
+            <button class="confirm-window-button" type="submit">Да</button>
+        </div>
+    </div>
+
+    <!-- Alert-block -->
+    <div class="alert-window alert-window-hidden" id="alert-window">
+        <div class="alert-window-title">
+            <span>Заполните данные</span>
+        </div>
+
+        <div class="alert-window-buttons">
+            <button class="alert-window-button" type="submit">Ок</button>
+        </div>
+    </div>
+
+    <!-- Sidebar menu -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-img">
+                <img src="Resourses/icon.png">
+            </div>
+            <div class="brand-name">
+                <span>Skeinc</span>
+            </div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+
+        <ul class="sidebar-list">
+            <li>
+                <a href="/personal">
+                    <i class='bx bx-user'></i>
+                    <span class="sidebar-link-name">Профиль</span>
+                </a>
+                    <span class="tooltip">Профиль</span>
+            </li>
+
+            <li>
+              <a href="/projects">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="sidebar-link-name">Проекты</span>
+                </a>
+                <span class="tooltip">Проекты</span>
+            </li>
+
+            <li>
+                <a href="/news">
+                    <i class='bx bx-news' ></i>
+                    <span class="sidebar-link-name">Новости</span>
+                </a>
+                <span class="tooltip">Новости</span>
+            </li>
+
+            <li>
+                <a href="/chats">
+                    <i class='bx bx-chat' ></i>
+                    <span class="sidebar-link-name">Чаты</span>
+                </a>
+                <span class="tooltip">Чаты</span>
+            </li>
+
+            <li>
+                <a href="/analytics">
+                    <i class='bx bx-pie-chart-alt-2' ></i>
+                    <span class="sidebar-link-name">Аналитика</span>
+                </a>
+                <span class="tooltip">Аналитика</span>
+            </li>
+
+            <li>
+                <a href="/finances">
+                    <i class='bx bxs-wallet-alt' ></i>
+                    <span class="sidebar-link-name">Финансы</span>
+                </a>
+                <span class="tooltip">Финансы</span>
+            </li>
+           
+            <li class="sidebar-profile">
+                <div class="sidebar-profile-details">
+                        <img src="/images:<%=user.avatar%>">
+                    <div class="sidebar-name-job">
+                        <div class="sidebar-name">
+                            <span><%=user.fio%></span>
+                        </div>
+                        <div class="sidebar-job">
+                            <span><%=user.role%></span>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="/logout" method="get">
+                    <button type="submit"><i class='bx bx-log-out' id="log_out" ></i></button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Home-section -->
+    <section class="home-section">
+        <!-- Menu -->
+        <div class="profile-menu">
+            <div class="profile-menu-brand">
+                <a href="/">
+                    <img src="Resourses/icon.png">
+                    <span>Skeinc</span>
+                </a>
+            </div>
+        </div>
+        <!-- Task-manager -->
+        <section class="section" id="margin-menu">
+            <div class="container-center">
+                <div class="task-manager">
+                    <div class="task-manager-header">
+                        <div class="task-manager-header-title">
+                            <span>Задачи</span>
+                        </div>
+
+                        <div class="task-manager-header-buttons">
+                            <span>Добавить задачу</span>
+                            <a href="#add-task"><i class='bx bx-plus'></i></a>
+                        </div>
+                    </div>
+
+                    <div class="task-manager-columns">
+                        <!-- Task Ready -->
+                        <div class="task-manager-column">
+                            <div class="task-manager-column-title">
+                                <span>Task Ready</span>
+                            </div>
+                            <%tasks.forEach(({dataValues:{task_id,task_name,task_description,task_date,task_priority,task_status,userTasks:{dataValues:{avatar,fio,role}}}})=>{%>
+                                <%if(task_status=='Task Ready'){%>
+                                    <div class="task-manager-column-items">
+                                        <div class="task-manager-column-item">
+                                            <div class="task-manager-item-id">
+                                                <span><%=task_id%></span>
+                                            </div>
+                
+                                            <div class="task-manager-item-title">
+                                                <span><%=task_name%></span>
+                                                <i class='bx bx-x'></i>
+                                            </div>
+                
+                                            <div class="task-manager-item-description">
+                                                <span><%=task_description%></span>
+                                            </div>
+
+                                            <div class="check-button-text">
+                                                <i class="bx bx-chevron-down"></i>
+                                            </div>
+        
+                                            <div class="task-manager-item-employee">
+                                                <img src="/images:<%=avatar%>">
+                                                <span><%=fio%></span>
+                                            </div>
+                
+                                            <div class="task-manager-item-info">
+                                                <span class="task-manager-item-date"><%=task_date%></span>
+                                                <span class="task-manager-item-status"><%=task_priority%></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                <%})%>
+                        </div>
+                        <!-- In progress -->
+                        <div class="task-manager-column">
+                            <div class="task-manager-column-title">
+                                <span>In Progress</span>
+                            </div>
+                            <%tasks.forEach(({dataValues:{task_id,task_name,task_description,task_date,task_priority,task_status,userTasks:{dataValues:{avatar,fio}}}})=>{%>
+                                <%if(task_status=='In Progress'){%>
+                                    <div class="task-manager-column-items">
+                                        <div class="task-manager-column-item">
+                                            <div class="task-manager-item-id">
+                                                <span><%=task_id%></span>
+                                            </div>
+                
+                                            <div class="task-manager-item-title">
+                                                <span><%=task_name%></span>
+                                                <i class='bx bx-x'></i>
+                                            </div>
+                
+                                            <div class="task-manager-item-description">
+                                                <span><%=task_description%></span>
+                                            </div>
+
+                                            <div class="check-button-text">
+                                                <i class="bx bx-chevron-down"></i>
+                                            </div>
+        
+                                            <div class="task-manager-item-employee">
+                                                <img src="/images:<%=avatar%>">
+                                                <span><%=fio%></span>
+                                            </div>
+
+                                            <div class="task-manager-item-info">
+                                                <span class="task-manager-item-date"><%=task_date%></span>
+                                                <span class="task-manager-item-status"><%=task_priority%></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                <%})%>
+                        </div>
+                        <!-- Needs Review -->
+                        <div class="task-manager-column">
+                            <div class="task-manager-column-title">
+                                <span>Needs Review</span>
+                            </div>
+                            <%tasks.forEach(({dataValues:{task_id,task_name,task_description,task_date,task_priority,task_status,userTasks:{dataValues:{avatar,fio}}}})=>{%>
+                                <%if(task_status=='Needs Review'){%>
+                                    <div class="task-manager-column-items">
+                                        <div class="task-manager-column-item item-needs-review">
+                                            <div class="task-manager-item-id">
+                                                <span><%=task_id%></span>
+                                            </div>
+                
+                                            <div class="task-manager-item-title">
+                                                <span><%=task_name%></span>
+                                                <i class='bx bx-x'></i>
+                                            </div>
+                
+                                            <div class="task-manager-item-description">
+                                                <span><%=task_description%></span>
+                                            </div>
+
+                                            <div class="check-button-text">
+                                                <i class="bx bx-chevron-down"></i>
+                                            </div>
+        
+                                            <div class="task-manager-item-employee">
+                                                <img src="/images:<%=avatar%>">
+                                                <span><%=fio%></span>
+                                            </div>
+                
+                                            <div class="task-manager-item-info">
+                                                <span class="task-manager-item-date"><%=task_date%></span>
+                                                <span class="task-manager-item-status"><%=task_priority%></span>
+                                            </div>
+                                            <div class="task-manager-item-button">
+                                                <button class="task-manager-button-finish" type="submit">Завершить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                <%})%>
+                        </div>
+                        <!-- Done -->
+                        <div class="task-manager-column">
+                            <div class="task-manager-column-title">
+                                <span>Done</span>
+                            </div>
+                            <%tasks.forEach(({dataValues:{task_id,task_name,task_description,task_date,task_priority,task_status,userTasks:{dataValues:{avatar,fio}}}})=>{%>
+                                <%if(task_status=='Done'){%>
+                                    <div class="task-manager-column-items">
+                                        <div class="task-manager-column-item">
+                                            <div class="task-manager-item-id">
+                                                <span><%=task_id%></span>
+                                            </div>
+                
+                                            <div class="task-manager-item-title">
+                                                <span><%=task_name%></span>
+                                                <i class='bx bx-x'></i>
+                                            </div>
+                
+                                            <div class="task-manager-item-description">
+                                                <span><%=task_description%></span>
+                                            </div>
+
+                                            <div class="check-button-text">
+                                                <i class="bx bx-chevron-down"></i>
+                                            </div>
+        
+                                            <div class="task-manager-item-employee">
+                                                <img src="/images:<%=avatar%>">
+                                                <span><%=fio%></span>
+                                            </div>
+                
+                                            <div class="task-manager-item-info">
+                                                <span class="task-manager-item-date"><%=task_date%></span>
+                                                <span class="task-manager-item-status"><%=task_priority%></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                <%})%>
+                        </div>
+
+                           
+                    </div>
+
+                    <div class="task-manager-buttons">
+                        <button type="submit" class="task-manager-edit-button">Редактировать</button>
+                        <button type="submit" class="task-manager-save-button">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add-task -->
+        <section class="section" id="add-task">
+            <div class="container-center">
+                <div class="add-task">
+                    <div class="add-task-header">
+                        <div class="add-task-header-title">
+                            <span>Новая задача</span>
+                        </div>
+                    </div>
+
+                    <div class="add-task-form">
+                        <div class="input-field">
+                            <input type="text" name="taskName" required>
+                            <span></span>
+                            <label>Название</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input type="text" name="taskDescription" required>
+                            <span></span>
+                            <label>Описание</label>
+                        </div>
+
+                        <div class="select-area" id="select-task-priorety">
+                            <div class="select-field">
+                                <span>Выберите приоритет</span>
+                                <i class='bx bxs-chevron-down' ></i>
+                            </div>
+
+                            <div class="select-content non-active-select">
+                                <div class="select-search">
+                                    <i class='bx bx-search' ></i>
+                                    <input type="text" placeholder="Search..">
+                                </div>
+
+                                <div class="select-items">
+                                    <div class="select-item">
+                                        <span>Низкий</span>
+                                    </div>
+
+                                    <div class="select-item">
+                                        <span>Средний</span>
+                                    </div>
+
+                                    <div class="select-item">
+                                        <span>Высокий</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="select-area" id="select-task-user">
+                            <div class="select-field">
+                                <span>Выберите сотрудника</span>
+                                <i class='bx bxs-chevron-down' ></i>
+                                <p class="select-field-id"></p>
+                            </div>
+
+                            <div class="select-content non-active-select">
+                                <div class="select-search">
+                                    <i class='bx bx-search' ></i>
+                                    <input type="text" placeholder="Search..">
+                                </div>
+
+                                <div class="select-items">
+                                    <%users.forEach(({dataValues:{fio,id,avatar,role}})=>{%>
+                                        <%if(role!="Администратор"&&user.role=="Администратор"){%>
+                                        <div class="select-item">
+                                            <p class="select-item-id"><%=id%></p>
+                                            <img src="/images:<%=avatar%>">
+                                            <span class="select-item-userName"><%=fio%></span>
+                                        </div>
+                                        <%}%>
+                                        <%if(role=="Сотрудник"&&user.role=="Редактор"&&user.id!=id){%>
+                                            <div class="select-item">
+                                                <p class="select-item-id"><%=id%></p>
+                                                <img src="/images:<%=avatar%>">
+                                                <span class="select-item-userName"><%=fio%></span>
+                                            </div>
+                                            <%}%>
+                                    <%})%>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-button">
+                            <input type="submit" value="Добавить">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- JS -->
+    <script src="JS/main/scroll.js"></script>
+    <script src="JS/main/sidebar.js"></script>
+    <script src="JS/tasks/task-manager.js"></script>
+    <script src="JS/tasks/addTask.js"></script>
+</body>
+</html>

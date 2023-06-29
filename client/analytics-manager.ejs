@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeinc</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="CSS/style-profile.css">
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="Resourses/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Confirm-block -->
+    <div class="confirm-window confirm-window-hidden" id="confirm-window">
+        <div class="confirm-window-title">
+            <span>Вы уверены?</span>
+        </div>
+
+        <div class="confirm-window-buttons">
+            <button class="confirm-window-button" type="submit">Отмена</button>
+            <button class="confirm-window-button" type="submit">Да</button>
+        </div>
+    </div>
+
+    <!-- Alert-block -->
+    <div class="alert-window alert-window-hidden" id="alert-window">
+        <div class="alert-window-title">
+            <span>Заполните данные</span>
+        </div>
+
+        <div class="alert-window-buttons">
+            <button class="alert-window-button" type="submit">Ок</button>
+        </div>
+    </div>
+
+    <!-- Sidebar menu -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-img">
+                <img src="Resourses/icon.png">
+            </div>
+            <div class="brand-name">
+                <span>Skeinc</span>
+            </div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+
+        <ul class="sidebar-list">
+            <li>
+                <a href="/personal">
+                    <i class='bx bx-user'></i>
+                    <span class="sidebar-link-name">Профиль</span>
+                </a>
+                    <span class="tooltip">Профиль</span>
+            </li>
+            <%if(user.role=="Администратор"||user.role=="Редактор"){%>
+                <li>
+                    <a href="/projects">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="sidebar-link-name">Проекты</span>
+                    </a>
+                    <span class="tooltip">Проекты</span>
+                </li>
+           <%}%>
+            <li>
+                <a href="/news">
+                    <i class='bx bx-news' ></i>
+                    <span class="sidebar-link-name">Новости</span>
+                </a>
+                <span class="tooltip">Новости</span>
+            </li>
+
+            <li>
+                <a href="/chats">
+                    <i class='bx bx-chat' ></i>
+                    <span class="sidebar-link-name">Чаты</span>
+                </a>
+                <span class="tooltip">Чаты</span>
+            </li>
+            <%if(user.role=="Администратор"){%>
+                <li>
+                    <a href="/analytics">
+                        <i class='bx bx-pie-chart-alt-2' ></i>
+                        <span class="sidebar-link-name">Аналитика</span>
+                    </a>
+                    <span class="tooltip">Аналитика</span>
+                </li>
+            <%}%>
+            <%if(user.role=="Администратор"||user.role=="Редактор"){%>
+                <li>
+                    <a href="/finances">
+                        <i class='bx bxs-wallet-alt' ></i>
+                        <span class="sidebar-link-name">Финансы</span>
+                    </a>
+                    <span class="tooltip">Финансы</span>
+                </li>
+            <%}%>
+            <li class="sidebar-profile">
+                <div class="sidebar-profile-details">
+                    <img src="/images:<%=user.avatar%>">
+                    <div class="sidebar-name-job">
+                        <div class="sidebar-name">
+                            <span><%=user.fio%></span>
+                        </div>
+                        <div class="sidebar-job">
+                            <span><%=user.role%></span>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="/logout" method="get">
+                    <button type="submit"><i class='bx bx-log-out' id="log_out" ></i></button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Home-section -->
+    <section class="home-section">
+        <!-- Menu -->
+        <div class="profile-menu">
+            <div class="profile-menu-brand">
+                <a href="/">
+                    <img src="Resourses/icon.png">
+                    <span>Skeinc</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- analytics-manager -->
+        <section class="section" id="margin-menu">
+            <div class="container-center">
+                <div class="analytics-manager">
+                    <div class="analytics-manager-header">
+                        <div class="analytics-manager-header-title">
+                            <span>Общая информация</span>
+                        </div>
+                    </div>
+
+                    <div class="analytics-manager-general">
+                        <div class="analytics-manager-general-items">
+                            <!-- Количество сотрудников в компании -->
+                            <div class="analytics-manager-general-item">
+                                <div class="analytics-manager-general-item-icon">
+                                    <i class='bx bx-male analytics-manager-icon-employee'></i>
+                                </div>
+
+                                <div class="analytics-manager-general-item-information">
+                                    <span class="analytics-manager-general-item-title">Количество сотрудников</span>
+                                    <span class="analytics-manager-general-item-data"><%=numberOfEmployees%></span>
+                                </div>
+                            </div>
+                            <!-- Количество выполненных проектов -->
+                            <div class="analytics-manager-general-item">
+                                <div class="analytics-manager-general-item-icon">
+                                    <i class='bx bx-briefcase analytics-manager-icon-projects'></i>
+                                </div>
+
+                                <div class="analytics-manager-general-item-information">
+                                    <span class="analytics-manager-general-item-title">Количество выполненных проектов</span>
+                                    <span class="analytics-manager-general-item-data"><%=numberOfProjects%></span>
+                                </div>
+                            </div>
+                            <!-- Количество выполненных задач -->
+                            <div class="analytics-manager-general-item">
+                                <div class="analytics-manager-general-item-icon">
+                                    <i class='bx bx-task analytics-manager-icon-task'></i>
+                                </div>
+
+                                <div class="analytics-manager-general-item-information">
+                                    <span class="analytics-manager-general-item-title">Количество выполненных задач</span>
+                                    <span class="analytics-manager-general-item-data"><%=numberOfTasks%></span>
+                                </div>
+                            </div>
+                            <!-- Количество транзакций -->
+                            <div class="analytics-manager-general-item">
+                                <div class="analytics-manager-general-item-icon">
+                                    <i class='bx bx-wallet analytics-manager-icon-finance'></i>
+                                </div>
+
+                                <div class="analytics-manager-general-item-information">
+                                    <span class="analytics-manager-general-item-title">Количество транзакций</span>
+                                    <span class="analytics-manager-general-item-data"><%=numberOfTransactions%></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Analytics finance -->
+        <section class="section">
+            <div class="container-center">
+                <div class="analytics-finance">
+                    <div class="analytics-manager-header">
+                        <div class="analytics-manager-header-title">
+                            <span>Финансы</span>
+                        </div>
+                    </div>
+
+                    <div class="analytics-manager-general">
+                        <div class="analytics-finance-items">
+                            <!-- Расходы за все время-->
+                            <div class="analytics-manager-finance-item">
+                                <div class="analytics-manager-general-item-icon">
+                                    <i class='bx bx-money analytics-manager-icon-expenses'></i>
+                                </div>
+
+                                <div class="analytics-manager-general-item-information">
+                                    <span class="analytics-manager-general-item-title">Расходы за все время</span>
+                                    <span class="analytics-finance-item-data analytics-finance-expenses"><p><%=expenses%></p> <i class='bx bx-ruble' ></i></span>
+                                </div>
+                            </div>
+
+                            <!-- Доходы за все время-->
+                            <div class="analytics-manager-finance-item">
+                                <div class="analytics-manager-general-item-icon">
+                                    <i class='bx bxs-bank analytics-manager-icon-income'></i>
+                                </div>
+
+                                <div class="analytics-manager-general-item-information">
+                                    <span class="analytics-manager-general-item-title">Доходы за все время</span>
+                                    <span class="analytics-finance-item-data analytics-finance-income"><p><%=income%></p> <i class='bx bx-ruble' ></i></span>
+                                </div>
+                            </div>
+
+                            <!-- Прибыль-->
+                            <div class="analytics-manager-finance-item">
+                                <div class="analytics-manager-general-item-icon">
+                                    <i class='bx bx-coin analytics-manager-icon-profit'></i>
+                                </div>
+
+                                <div class="analytics-manager-general-item-information">
+                                    <span class="analytics-manager-general-item-title">Прибыль</span>
+                                    <span class="analytics-finance-item-data analytics-finance-profit"><p></p><i class='bx bx-ruble' ></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Employee Salary -->
+        <section class="section">
+            <div class="container-center">
+                <div class="analytics-employee-salary">
+                    <div class="employee-salary-max">
+                        <span class="employee-salary-text"><%=highestSalary%> <i class='bx bx-ruble'></i></span>
+                        <span class="employee-salary-title">Наибольшая зарплата</span>
+                    </div>
+
+                    <div class="employee-salary-average">
+                        <span class="employee-salary-text"><%=averageSalary%> <i class='bx bx-ruble'></i></span>
+                        <span class="employee-salary-title">Средняя зарплата</span>
+                    </div>
+
+                    <div class="employee-salary-expenses">
+                        <span class="employee-salary-text"><%=salarySum%> <i class='bx bx-ruble'></i></span>
+                        <span class="employee-salary-title">Затраты на зарплату в месяц</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recently-Activites -->
+        <section class="section">
+            <div class="container-center">
+                <div class="analytics-manager-recently-activity">
+                    <div class="analytics-manager-header">
+                        <div class="analytics-manager-header-title">
+                            <span>Последние совершенные транзакции</span>
+                        </div>
+                    </div>
+
+                    <div class="analytics-manager-recently-items">
+                        <!-- Всего 4 элемента -->
+                        <%latestTransactions.forEach(({finance_id,finance_status,finance_cost,finance_name,finance_date})=>{%>
+                            <div class="analytics-manager-recently-item analytics-manager-finance">
+                                <span class="analytics-manager-finance-id"><%=finance_id%></span>
+                                <span class="analytics-manager-finance-status"><%=finance_status%></span>
+                                <span class="analytics-manager-finance-cost"><p></p><%=finance_cost%><i class='bx bx-ruble' ></i></span>
+                                <span class="analytics-manager-finance-name"><%=finance_name%></span>
+                                <span class="analytics-manager-finance-date"><%=finance_date%></span>
+                            </div>
+
+                        <%})%>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container-center">
+                <div class="analytics-manager-recently-activity">
+                    <div class="analytics-manager-header">
+                        <div class="analytics-manager-header-title">
+                            <span>Последние завершенные задачи</span>
+                        </div>
+                    </div>
+
+                    <div class="analytics-manager-recently-items">
+                        <!-- Всего 4 элемента -->
+                        <%latestTasks.forEach(({task_id,task_name,task_date})=>{%>
+                            <div class="analytics-manager-recently-item analytics-manager-task">
+                                <span class="analytics-manager-task-id"><%=task_id%></span>
+                                <span class="analytics-manager-task-status">Завершено:</span>
+                                <span class="analytics-manager-task-name"><%=task_name%></span>
+                                <span class="analytics-manager-task-date"><%=task_date%></span>
+                            </div>
+
+                        <%})%>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Check time-manager -->
+        <section class="section">
+            <div class="container-center">
+                <div class="check-time-manager">
+                    <div class="check-time-manager-header">
+                        <div class="check-time-manager-header-title">
+                            <span>Тайм-менеджер работников</span>
+                        </div>
+                    </div>
+
+                    <div class="check-time-manager-form">
+                        <div class="select-area" id="select-employee">
+                            <div class="select-field">
+                                <span>Выберите сотрудника</span>
+                                <i class='bx bxs-chevron-down' ></i>
+                                <p class="select-field-id"></p>
+                            </div>
+
+                            <div class="select-content non-active-select">
+                                <div class="select-search">
+                                    <i class='bx bx-search' ></i>
+                                    <input type="text" placeholder="Search..">
+                                </div>
+
+                                <div class="select-items">
+                                    <%employees.forEach(({dataValues:{fio,avatar,id,role}})=>{%>
+                                        <% if(role!="Администратор"){%>
+                                        <div class="select-item">
+                                            <p class="select-employee-id"><%=id%></p>
+                                            <img src="/images:<%=avatar%>">
+                                            <span class="select-employee-name"><%=fio%></span>
+                                        </div>
+                                        <% } %>
+                                   <%})%>
+                                    <!-- <div class="select-item">
+                                        <p class="select-employee-id">2</p>
+                                        <img src="Resourses/new-user.png">
+                                        <span class="select-employee-name">Прусаков Михаил Александрович</span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-field">
+                            <input type="date" id="inputDate" required>
+                        </div>
+
+                        <div class="input-button">
+                            <input type="submit" class="showBtn" value="Просмотреть">
+                        </div>
+                    </div>
+
+                    <div class="check-time-manager-general">
+                        <div class="check-time-manager-empty">
+                            <span>Данных нет</span>
+                        </div>
+                        <!-- Employee time manager data -->
+                        <div class="check-time-manager-item">
+                            <div class="check-time-manager-item-title">
+                                <span>Начал рабочий день</span>
+                            </div>
+                            
+                            <div class="check-time-manager-item-info">
+                                <span class="check-time-manager-item-info-time">08:01:40</span>
+                            </div>
+                        </div>
+
+                        <div class="check-time-manager-item">
+                            <div class="check-time-manager-item-title">
+                                <span>Закончил рабочий день</span>
+                            </div>
+                            
+                            <div class="check-time-manager-item-info">
+                                <span class="check-time-manager-item-info-time">18:01:40</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+    <!-- JS -->
+    <script src="JS/main/sidebar.js"></script>
+    <script src="JS/analytics/analytics-manager.js"></script>
+</body>
+</html>

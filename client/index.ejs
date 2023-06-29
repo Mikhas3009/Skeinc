@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeinc</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="CSS/style.css">
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="Resourses/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Menu -->
+    <nav>
+        <div class="menu-container">
+            <div class="menu-brand">
+                <a href="/"><img src="Resourses/icon.png"><span>Skeinc</span></a>
+            </div>
+
+            <div class="menu-items">
+                <div class="menu-item">
+                    <a href="/"><span>Home</span></a>
+                </div>
+
+                <div class="menu-item">
+                    <a href="#About"><span>About</span></a>
+                </div>
+
+                <div class="menu-item">
+                    <a href="#Solutions"><span>Solutions</span></a>
+                </div>
+
+                <div class="menu-item">
+                    <a href="#Partners"><span>Partners</span></a>
+                </div>
+
+                <div class="menu-item">
+                    <a href="#Сontacts"><span>Contacts</span></a>
+                </div>
+            </div>
+
+            <div class="menu-account">
+                <a href="/signin"><span>Sign Up</span></a>
+            </div>
+
+            <div class="menu-toggle toggle-hidden">
+                <a class="toggle-btn" onclick="responsiveMenu()"><span class="material-symbols-outlined">menu</span></a>
+            </div>
+        </div>
+
+        <div class="menu-overlay">
+
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <section>
+        <div class="banner-container">
+            <div class="banner">
+                <div class="banner-information">
+                    <div class="banner-information-title">
+                        <span>Skeinc - лучшее решение для вашего бизнеса</span>
+                    </div>
+
+                    <div class="banner-information-text">
+                        <span>Благодаря нашей компании вы можете упростить ведение бизнеса в вашем предприятие, изучите наши решения и сделайте свой выбор.</span>
+                    </div>
+
+                    <div class="banner-information-btn">
+                        <a href="#"><span>Get started</span></a>
+                    </div>
+                </div>
+
+                <div class="banner-photo">
+                    <img src="Resourses/banner.png">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="About">
+        <div class="container-title">
+            <span>Немного о нас</span>
+        </div>
+
+        <div class="about-container">
+            <div class="about-items">
+                <div class="about-item">
+                    <div class="about-item-photo">
+                        <img src="Resourses/about-photo-1.png" id="about-photo-1">
+                    </div>
+
+                    <div class="about-item-information">
+                        <div class="about-item-information-title">
+                            <span>Вести бизнес - легко</span>
+                        </div>
+
+                        <div class="about-item-information-text text-left">
+                            <span>Skeinc - онлайн-компания для ведения вашего бизнеса. Благодаря возможностям нашего сервиса работа с клиентами, сотрудниками, а также внутренней структурой вашего бизнеса станет намного легче!<br>Мы используем современные и полезные решения, чтобы вам было комфортно, удобно и легко использовать их в своей работе.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-item">
+                    <div class="about-item-information">
+                        <div class="about-item-information-title">
+                            <span>Все под вашим контролем</span>
+                        </div>
+
+                        <div class="about-item-information-text text-left">
+                            <span>При помощи возможностей нашей компании вы сможете полностью автоматизировать ваш бизнес, упростить ряд действий, задач не только вам, но и вашим сотрудникам. Вы сможете полностью контролировать и следить за ходом работ в вашем бизнесе!<br>Автомитизируйте свой бизнес сами, для этого вам не нужны никакие знания и помощь специалистов, при помощи удобного и простого интерфейса настроить систему сможет даже новичок!</span>
+                        </div>
+                    </div>
+
+                    <div class="about-item-photo">
+                        <img src="Resourses/about-photo-2.png" id="about-photo-2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions -->
+    <section id="Solutions">
+        <div class="container-title">
+            <span>Наши решения</span>
+        </div>
+
+        <div class="solution-container">
+            <div class="solution-items">
+                <div class="solution-item">
+                    <div class="solution-item-img">
+                        <img src="Resourses/tasks-logo.png">
+                    </div>
+
+                    <div class="solution-item-title">
+                        <span>Создание рабочих задач</span>
+                    </div>
+
+                    <div class="solution-item-text">
+                        <span>Создавайте и контролируйте ход выполнения рабочих задач, отслеживайте процесс работы у ваших сотрудников в любой момент.</span>
+                    </div>
+
+                    <div class="solution-item-button">
+                        <a href="signin.html"><span>Попробовать</span></a>
+                    </div>
+                </div>
+
+                <div class="solution-item">
+                    <div class="solution-item-img">
+                        <img src="Resourses/time-manager-logo.png">
+                    </div>
+
+                    <div class="solution-item-title">
+                        <span>Контроль над тайм-менеджментом</span>
+                    </div>
+
+                    <div class="solution-item-text">
+                        <span>Создайте и настройте тайм-менеджер для своей компании, отслеживайте временной ресурс сотрудников и получайте анализ по каждому сотруднику.</span>
+                    </div>
+
+                    <div class="solution-item-button">
+                        <a href="signin.html"><span>Попробовать</span></a>
+                    </div>
+                </div>
+
+                <div class="solution-item">
+                    <div class="solution-item-img">
+                        <img src="Resourses/news-logo.png">
+                    </div>
+
+                    <div class="solution-item-title">
+                        <span>Создание новостей</span>
+                    </div>
+
+                    <div class="solution-item-text">
+                        <span>Создавайте любые новости для вашей компании, которые увидят все ваши сотрудники, удаляйте неактуальную и добавляйте свежую информацию для вашей компании.</span>
+                    </div>
+
+                    <div class="solution-item-button">
+                        <a href="signin.html"><span>Попробовать</span></a>
+                    </div>
+                </div>
+
+                <div class="solution-item">
+                    <div class="solution-item-img">
+                        <img src="Resourses/chats-logo.png">
+                    </div>
+
+                    <div class="solution-item-title">
+                        <span>Создание рабочих чатов</span>
+                    </div>
+
+                    <div class="solution-item-text">
+                        <span>Воспользуйтесь рабочими чатами между администраторами и сотрудниками компании для решения или обсуждения проблем в конкретных поставленных задачах.</span>
+                    </div>
+
+                    <div class="solution-item-button">
+                        <a href="signin.html"><span>Попробовать</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section id="Partners">
+        <div class="container-title">
+            <span>Партнеры</span>
+        </div>
+
+        <div class="partners-container">
+            <div class="partners-slider">
+               <div class="partners-controller">
+                    <div class="controller-back">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </div>
+
+                    <div class="partners-items">
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-1.png">
+                            </div>
+                        </div>
+
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-2.png">
+                            </div>
+                        </div>
+
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-3.png">
+                            </div>
+                        </div>
+
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-4.png">
+                            </div>
+                        </div>
+
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-5.png">
+                            </div>
+                        </div>
+
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-6.png">
+                            </div>
+                        </div>
+
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-7.png">
+                            </div>
+                        </div>
+
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-8.png">
+                            </div>
+                        </div>
+
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-9.png">
+                            </div>
+                        </div>
+
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-10.png">
+                            </div>
+                        </div>
+
+                        <div class="partners-item">
+                            <div class="partners-item-img">
+                                <img src="Resourses/partner-11.png">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="controller-next">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="partners-swiper">
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- History -->
+    <section id="history">
+        <div class="container-title">
+            <span>Истории наших клиентов</span>
+        </div>
+
+        <div class="history-container">
+            <div class="history-slider">
+                <div class="history-slider-items">
+                    <div class="history-slider-item current-slide">
+                        <div class="history-slider-item-img">
+                            <img src="Resourses/history-1.jpg">
+                        </div>
+
+                        <div class="history-slider-item-texture">
+                            <img src="Resourses/gradient.png">
+                        </div>
+
+                        <div class="history-slider-item-info">
+                            <div class="slider-item-info-title">
+                                <span>«Skeinc — невероятно удобный инструмент, позволяющий легко вести записи, составлять отчеты и управлять проектами, и при этом не слишком сложный для наших креативщиков».</span>
+                            </div>
+
+                            <div class="slider-item-info-post">
+                                <span>Гарет Берч, старший операционный менеджер, Креативный центр Sony Pictures Television</span>
+                            </div>
+
+                            <div class="slider-item-info-button">
+                                <a href="signin.html">Get started</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="history-slider-item">
+                        <div class="history-slider-item-img">
+                            <img src="Resourses/history-2.jpg">
+                        </div>
+
+                        <div class="history-slider-item-texture">
+                            <img src="Resourses/gradient.png">
+                        </div>
+
+                        <div class="history-slider-item-info">
+                            <div class="slider-item-info-title">
+                                <span>«Изменения внутри компании всегда воспринимаются сложно — на адаптацию сотрудников и принятие нового инструмента ушел примерно год, но результаты того стоили».</span>
+                            </div>
+
+                            <div class="slider-item-info-post">
+                                <span>Алекс Андерсон, операционный менеджер команды доставки</span>
+                            </div>
+
+                            <div class="slider-item-info-button">
+                                <a href="signin.html">Get started</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="history-slider-item">
+                        <div class="history-slider-item-img">
+                            <img src="Resourses/history-3.jpg">
+                        </div>
+
+                        <div class="history-slider-item-texture">
+                            <img src="Resourses/gradient.png">
+                        </div>
+
+                        <div class="history-slider-item-info">
+                            <div class="slider-item-info-title">
+                                <span>«Skeinc помог сотрудникам, не задействованным на производстве, оперативно перейти на удаленную работу из-за карантина без потери продуктивности».</span>
+                            </div>
+
+                            <div class="slider-item-info-post">
+                                <span>Карлос Уильямс, директор департамента проектирования</span>
+                            </div>
+
+                            <div class="slider-item-info-button">
+                                <a href="signin.html">Get started</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="history-slider-item">
+                        <div class="history-slider-item-img">
+                            <img src="Resourses/history-4.jpg">
+                        </div>
+
+                        <div class="history-slider-item-texture">
+                            <img src="Resourses/gradient.png">
+                        </div>
+
+                        <div class="history-slider-item-info">
+                            <div class="slider-item-info-title">
+                                <span>«Skeinc позволил в два раза сократить время с момента получения брифа от заказчика до старта работы над проектом — это очень ценно для нас.»</span>
+                            </div>
+
+                            <div class="slider-item-info-post">
+                                <span>Кевин Фишер, Менеджер проектов</span>
+                            </div>
+
+                            <div class="slider-item-info-button">
+                                <a href="signin.html">Get started</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-slider-controllers">
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts -->
+    <section id="Сontacts">
+        <div class="container-title" id="contacts-title">
+            <span>Контакты</span>
+        </div>
+
+        <div class="contacts-container">
+            <div class="contacts-form">
+                <form action="/mail" method="post" class="contact-email">
+                    <div class="field">
+                        <span class="material-symbols-outlined">person</span>
+                        <input class="input-field" type="text" name="name" placeholder="Ваше имя" required>
+                    </div>
+
+                    <div class="field">
+                        <span class="material-symbols-outlined">email</span>
+                        <input class="input-field" type="email" name="email" placeholder="Ваш Email" required>
+                    </div>
+
+                    <div class="field">
+                        <span class="material-symbols-outlined">comment</span>
+                        <input class="input-field" type="text" name="subject" placeholder="Тема письма" required>
+                    </div>
+
+                    <div class="field">
+                        <span id="textarea-icon" class="material-symbols-outlined">mail</span>
+                        <textarea class="input-field" name="message" class="input1" id="email-mes" placeholder="Сообщение" required></textarea>
+                    </div>
+                    <input id="email-btn" type="submit" value="Отправить сообщение">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+        <div class="footer">
+            <div class="footer-banner">
+                <div class="footer-banner-title">
+                    <span>Присоединяйтесь к нашему комьюнити</span>
+                </div>
+
+                <div class="footer-banner-text">
+                    <span>Попробуйте нашу эффективную платформу для управления совместной работой соверешенно бесплатно</span>
+                </div>
+
+                <div class="footer-banner-button">
+                    <a href="/signin">Get started</a>
+                </div>
+            </div>
+
+            <hr class="footer-hr">
+
+            <div class="footer-items">
+                <div class="footer-links">
+                    <a href="/"><span>Home</span></a>
+                    <a href="#About"><span>About</span></a>
+                    <a href="#Solutions"><span>Solutions</span></a>
+                    <a href="#Partners"><span>Partners</span></a>
+                    <a href="#Сontacts"><span>Contacts</span></a>
+                </div>
+
+                <div class="social-media">
+                    <div class="social-media-text">
+                        <a href="https://vk.com/id184205411"><img src="Resourses/vk-logo.png"><span>Вконтакте</span></a>
+                    </div>
+
+                    <div class="social-media-text">
+                        <a href="https://github.com/IamSkezy"><img src="Resourses/github-logo.png"><span>Github</span></a>
+                    </div>
+
+                    <div class="social-media-text">
+                        <a href="@Ske3y"><img src="Resourses/telegram-logo.png"><span>Telegram</span></a>
+                    </div>
+
+                    <div class="social-media-text">
+                        <a href="https://www.youtube.com/channel/UConfswq-cCrDuNayaqAHwXA"><img src="Resourses/youtube-logo.png"><span>Youtube</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="footer-hr-end">
+
+            <div class="authors">
+                <div class="authors-text">
+                    <span>This web-service was created for diplom project</span>
+                </div>
+                <div class="authors-text">
+                    <span><span class="material-symbols-outlined">copyright</span> Skeinc 2023, developer - <a href="https://github.com/IamSkezy">Anufriev Dmitry</a></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JS -->
+    <script src="JS/main/slider.js"></script>
+    <script src="JS/main/partners.js"></script>
+    <script src="JS/main/menu.js"></script>
+    <script src="JS/main/about.js"></script>
+    <script src="JS/main/scroll.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

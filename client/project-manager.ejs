@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeinc</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="CSS/style-profile.css">
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="Resourses/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Confirm-block -->
+    <div class="confirm-window confirm-window-hidden" id="confirm-window">
+        <div class="confirm-window-title">
+            <span>Вы уверены?</span>
+        </div>
+
+        <div class="confirm-window-buttons">
+            <button class="confirm-window-button" type="submit">Отмена</button>
+            <button class="confirm-window-button" type="submit">Да</button>
+        </div>
+    </div>
+
+    <!-- Alert-block -->
+    <div class="alert-window alert-window-hidden" id="alert-window">
+        <div class="alert-window-title">
+            <span>Заполните данные</span>
+        </div>
+
+        <div class="alert-window-buttons">
+            <button class="alert-window-button" type="submit">Ок</button>
+        </div>
+    </div>
+
+    <!-- Sidebar menu -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-img">
+                <img src="Resourses/icon.png">
+            </div>
+            <div class="brand-name">
+                <span>Skeinc</span>
+            </div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+
+        <ul class="sidebar-list">
+            <li>
+                <a href="/personal">
+                    <i class='bx bx-user'></i>
+                    <span class="sidebar-link-name">Профиль</span>
+                </a>
+                    <span class="tooltip">Профиль</span>
+            </li>
+            <%if(user.role=="Администратор"||user.role=="Редактор"){%>
+                <li>
+                    <a href="/projects">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="sidebar-link-name">Проекты</span>
+                    </a>
+                    <span class="tooltip">Проекты</span>
+                </li>
+           <%}%>
+            <li>
+                <a href="/news">
+                    <i class='bx bx-news' ></i>
+                    <span class="sidebar-link-name">Новости</span>
+                </a>
+                <span class="tooltip">Новости</span>
+            </li>
+
+            <li>
+                <a href="/chats">
+                    <i class='bx bx-chat' ></i>
+                    <span class="sidebar-link-name">Чаты</span>
+                </a>
+                <span class="tooltip">Чаты</span>
+            </li>
+            <%if(user.role=="Администратор"){%>
+                <li>
+                    <a href="/analytics">
+                        <i class='bx bx-pie-chart-alt-2' ></i>
+                        <span class="sidebar-link-name">Аналитика</span>
+                    </a>
+                    <span class="tooltip">Аналитика</span>
+                </li>
+            <%}%>
+            <%if(user.role=="Администратор"||user.role=="Редактор"){%>
+                <li>
+                    <a href="/finances">
+                        <i class='bx bxs-wallet-alt' ></i>
+                        <span class="sidebar-link-name">Финансы</span>
+                    </a>
+                    <span class="tooltip">Финансы</span>
+                </li>
+           <%}%>
+            <li class="sidebar-profile">
+                <div class="sidebar-profile-details">
+                    <img src="/images:<%=user.avatar%>">
+                    <div class="sidebar-name-job">
+                        <div class="sidebar-name">
+                            <span><%=user.fio%></span>
+                        </div>
+                        <div class="sidebar-job">
+                            <span><%=user.role%></span>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="/logout" method="get">
+                    <button type="submit"><i class='bx bx-log-out' id="log_out" ></i></button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Home-section -->
+    <section class="home-section">
+        <!-- Menu -->
+        <div class="profile-menu">
+            <div class="profile-menu-brand">
+                <a href="/">
+                    <img src="Resourses/icon.png">
+                    <span>Skeinc</span>
+                </a>
+            </div>
+        </div>
+        <!-- Project-manager -->
+        <section class="section" id="margin-menu">
+            <div class="container-center">
+                <div class="project-manager">
+                    <div class="project-manager-header">
+                        <div class="project-manager-header-title">
+                            <span>Проекты</span>
+                        </div>
+
+                        <div class="project-manager-header-buttons">
+                            <span>Добавить проект</span>
+                            <a href="#add-project"><i class='bx bx-plus'></i></a>
+                        </div>
+                    </div>
+
+                    <div class="project-manager-items">
+                        <%projects.forEach(({dataValues:{project_id,project_name,project_description,project_date,projectTasks,project_status}})=>{%>
+                            <%if(project_status!=="Done"){%>
+                            <div class="project-manager-item">
+                                <div class="project-manager-item-id">
+                                    <span><%=project_id%></span>
+                                </div>
+    
+                                <div class="project-manager-item-title">
+                                    <span><%=project_name%></span>
+                                </div>
+    
+                                <div class="project-manager-item-description">
+                                    <span><%=project_description%></span>
+                                </div>
+
+                                <div class="check-button-text">
+                                    <i class="bx bx-chevron-down"></i>
+                                </div>
+    
+                                <div class="project-manager-item-info">
+                                    <span class="project-manager-item-date"><%=project_date%></span>
+                                     <%var tasksReady =0%>
+                                     <%var allTasks =0%>
+                                     <%projectTasks.forEach(({dataValues:{task_status}})=>{%>
+                                        <% allTasks++%>
+                                        <%if(task_status=="Done"){tasksReady++}%>
+                                    <%})%>
+                                    <span class="project-manager-item-status"><span class="project-manager-task-finished"><%=tasksReady%></span> / <span class="project-manager-task-all"><%=allTasks%></span></span></span>
+                                </div>
+    
+                                <div class="project-manager-item-button">
+                                    <a class="project-manager-button-finish" href="/tasks:<%=project_id%>">Задачи</a>
+                                    <button class="project-manager-button-finish" type="submit">Завершить</button>
+                                </div>
+                            </div>
+                            <%}%>
+                       <%})%>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Add-project -->
+        <section class="section" id="add-project">
+            <div class="container-center">
+                <div class="add-project">
+                    <div class="add-project-header">
+                        <div class="add-project-header-title">
+                            <span>Новый проект</span>
+                        </div>
+                    </div>
+
+                    <div class="add-project-form">
+                        <div class="input-field">
+                            <input type="text" name="projectName" required>
+                            <span></span>
+                            <label>Название</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input type="text" name="projectDescription" required>
+                            <span></span>
+                            <label>Описание</label>
+                        </div>
+
+                        <div class="input-button">
+                            <input type="submit" value="Добавить">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+    <!-- JS -->
+    <script src="JS/main/sidebar.js"></script>
+    <script src="JS/project/project-manager.js"></script>
+    <script src="JS/main/scroll.js"></script>
+    <script src="JS/project/addProject.js"></script>
+</body>
+</html>

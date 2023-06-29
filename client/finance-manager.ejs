@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link rel="stylesheet" href="CSS/style-profile.css">
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="Resourses/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Confirm-block -->
+    <div class="confirm-window confirm-window-hidden" id="confirm-window">
+        <div class="confirm-window-title">
+            <span>Вы уверены?</span>
+        </div>
+
+        <div class="confirm-window-buttons">
+            <button class="confirm-window-button" type="submit">Отмена</button>
+            <button class="confirm-window-button" type="submit">Да</button>
+        </div>
+    </div>
+
+    <!-- Alert-block -->
+    <div class="alert-window alert-window-hidden" id="alert-window">
+        <div class="alert-window-title">
+            <span>Заполните данные</span>
+        </div>
+
+        <div class="alert-window-buttons">
+            <button class="alert-window-button" type="submit">Ок</button>
+        </div>
+    </div>
+
+    <!-- Sidebar menu -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-img">
+                <img src="Resourses/icon.png">
+            </div>
+            <div class="brand-name">
+                <span>Skeinc</span>
+            </div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+
+        <ul class="sidebar-list">
+            <li>
+                <a href="/personal">
+                    <i class='bx bx-user'></i>
+                    <span class="sidebar-link-name">Профиль</span>
+                </a>
+                    <span class="tooltip">Профиль</span>
+            </li>
+            <%if(user.role=="Администратор"||user.role=="Редактор"){%>
+                <li>
+                    <a href="/projects">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="sidebar-link-name">Проекты</span>
+                    </a>
+                    <span class="tooltip">Проекты</span>
+                </li>
+           <%}%>
+            <li>
+                <a href="/news">
+                    <i class='bx bx-news' ></i>
+                    <span class="sidebar-link-name">Новости</span>
+                </a>
+                <span class="tooltip">Новости</span>
+            </li>
+
+            <li>
+                <a href="/chats">
+                    <i class='bx bx-chat' ></i>
+                    <span class="sidebar-link-name">Чаты</span>
+                </a>
+                <span class="tooltip">Чаты</span>
+            </li>
+            <%if(user.role=="Администратор"){%>
+                <li>
+                    <a href="/analytics">
+                        <i class='bx bx-pie-chart-alt-2' ></i>
+                        <span class="sidebar-link-name">Аналитика</span>
+                    </a>
+                    <span class="tooltip">Аналитика</span>
+                </li>
+            <%}%>
+            <%if(user.role=="Администратор"||user.role=="Редактор"){%>
+                <li>
+                    <a href="/finances">
+                        <i class='bx bxs-wallet-alt' ></i>
+                        <span class="sidebar-link-name">Финансы</span>
+                    </a>
+                    <span class="tooltip">Финансы</span>
+                </li>
+           <%}%>
+            <li class="sidebar-profile">
+                <div class="sidebar-profile-details">
+                    <img src="/images:<%=user.avatar%>">
+                    <div class="sidebar-name-job">
+                        <div class="sidebar-name">
+                            <span><%=user.fio%></span>
+                        </div>
+                        <div class="sidebar-job">
+                            <span><%=user.role%></span>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="/logout" method="get">
+                    <button type="submit"><i class='bx bx-log-out' id="log_out" ></i></button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Home-section -->
+    <section class="home-section">
+        <!-- Menu -->
+        <div class="profile-menu">
+            <div class="profile-menu-brand">
+                <a href="/">
+                    <img src="Resourses/icon.png">
+                    <span>Skeinc</span>
+                </a>
+            </div>
+        </div>
+        <!-- Finance-manager -->
+        <section class="section" id="margin-menu">
+            <div class="container-center">
+                <div class="finance-manager">
+                    <div class="finance-manager-header">
+                        <div class="finance-manager-header-title">
+                            <span>Финансы</span>
+                        </div>
+
+                        <div class="finance-manager-header-buttons">
+                            <span>Добавить транзакцию</span>
+                            <a href="#add-finance"><i class='bx bx-plus'></i></a>
+                        </div>
+                    </div>
+
+                    <div class="finance-manager-filters">
+                        <div class="finance-manager-filters-item">
+                            <div class="select-title">
+                                <span>Выберите месяц:</span>
+                            </div>
+    
+                            <div class="select-area-finance-manager" id="select-finance-months">
+                                <div class="select-field">
+                                    <span>Выберите месяц</span>
+                                    <i class='bx bxs-chevron-down' ></i>
+                                </div>
+    
+                                <div class="select-content non-active-select">
+                                    <div class="select-items">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="finance-manager-filters-item">
+                            <div class="select-title">
+                                <span>Выберите год:</span>
+                            </div>
+    
+                            <div class="select-area-finance-manager" id="select-finance-years">
+                                <div class="select-field">
+                                    <span>Выберите год</span>
+                                    <i class='bx bxs-chevron-down' ></i>
+                                </div>
+    
+                                <div class="select-content non-active-select">
+                                    <div class="select-items">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="finance-manager-filters-button">
+                            <button type="submit">Применить</button>
+                        </div>
+                    </div>
+
+                    <div class="finance-manager-items">
+                        
+                
+
+                        <%transactions.forEach(({dataValues:{finance_id,finance_status,finance_cost,finance_name,finance_date}})=>{%>
+                            <div class="finance-manager-item">
+                                <div class="finance-manager-item-id">
+                                    <span><%=finance_id%></span>
+                                </div>
+                               
+    
+                                <div class="finance-manager-item-status">
+                                    <span><%=finance_status%></span>
+                                </div>
+    
+                                <div class="finance-manager-item-cost">
+                                    <span></span>
+                                    <span class="finance-manager-item-cost-int"><%=finance_cost%></span>
+                                </div>
+    
+                                <div class="finance-manager-item-information">
+                                    <div class="finance-manager-item-text">
+                                        <span><%=finance_name%></span>
+                                    </div>
+                                    
+                                    <div class="finance-manager-item-date">
+                                        <span><%=finance_date%></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <%})%>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add-finance -->
+        <section class="section" id="add-finance">
+            <div class="container-center">
+                <div class="add-finance">
+                    <div class="add-project-header">
+                        <div class="add-project-header-title">
+                            <span>Новая транзакция</span>
+                        </div>
+                    </div>
+
+                    <div class="add-project-form">
+                        <div class="input-field">
+                            <input type="text" name="financeName" required>
+                            <span></span>
+                            <label>Название</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input type="number" name="financeCost" min="0" required>
+                            <span></span>
+                            <label>Цена</label>
+                        </div>
+
+                        <div class="select-area" id="select-finance-status">
+                            <div class="select-field">
+                                <span>Выберите тип</span>
+                                <i class='bx bxs-chevron-down' ></i>
+                            </div>
+
+                            <div class="select-content non-active-select">
+                                <div class="select-items">
+                                    <div class="select-item">
+                                        <span>Доходы</span>
+                                    </div>
+
+                                    <div class="select-item">
+                                        <span>Расходы</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-button">
+                            <input type="submit" value="Добавить">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- JS -->
+    <script src="JS/main/scroll.js"></script>
+    <script src="JS/main/sidebar.js"></script>
+    <script src="JS/finance/finance-manager.js"></script>
+    <script src="JS/finance/add-finance.js"></script>
+</body>
+</html>
