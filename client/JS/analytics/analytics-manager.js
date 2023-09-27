@@ -81,7 +81,6 @@ SelectEmployeeField.addEventListener('click', () => {
 let timeManagerShowBtn = document.querySelector(".showBtn");
 let checkTimeManagerAlertWindow = document.querySelector('.alert-window');
 let checkTimeManagerGeneral = document.querySelector(".check-time-manager-general");
-let checkTimeManagerItems = document.querySelectorAll('.check-time-manager-item');
 let checkTimeManagerEmployeeArr = [];
 let checkTimeManagerEmployeeObj = {
     employeeId: null,
@@ -134,15 +133,42 @@ timeManagerShowBtn.addEventListener('click', ()=> {
         return response.json();
     })
     .then((data) => {
-        console.log("Отправленные данные", data)
+        timeManagerGeneral.innerHTML = "";
+        console.log("Отправленные данные", data);
+        getTimeManager(data);
+
+        let emptyData = document.querySelector('.check-time-manager-empty');;
+        if(data.length == 0) {
+            emptyData.style.display = "flex";
+        }
+        else {
+            emptyData.style.display = "none";
+        }
+
     })
     .catch((err) => {
         console.log(err);
     })
-
-    if(checkTimeManagerItems.length == 0) {
-        let emptyData = document.querySelector('.check-time-manager-empty');
-        emptyData.style.display = "flex";
-    }
     
 })
+
+// Получение данных
+let timeManagerGeneral = document.querySelector('.check-time-manager-general');
+// Создание предметов тайм-менеджера
+function getTimeManager(array) {
+    let size = array.length;
+
+    let timeManagerItem;
+
+    for(let i = 0; i < size; i++) {
+        timeManagerItem = `<div class="check-time-manager-item">
+            <div class="check-time-manager-item-title">
+                <span>${array[i].time_manager_title}</span>
+            </div>
+            <div class="check-time-manager-item-info">
+                <span>${array[i].time_manager_time}</span>
+            </div>
+        </div>`;
+        timeManagerGeneral.innerHTML += timeManagerItem;    
+    }
+}

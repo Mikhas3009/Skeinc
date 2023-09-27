@@ -32,6 +32,7 @@ export class ChatsService {
 
     async saveMessage(socketData){
         const{userSenderID,userRecipientId,text,time,date,}=socketData;
+        console.log(socketData)
         await this.chatDB.create({
             chat_message:text,
             chat_date:date,

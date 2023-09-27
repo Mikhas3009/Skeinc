@@ -9,6 +9,7 @@ let ChatManagerSelectedUserImg = document.querySelector('.chat-manager-selected-
 let ChatManagerSearchField = document.querySelector('.chat-manager-search').children[1];
 let ChatField = document.querySelector('.chat-manager-controller').children[0].children[0];
 let ChatSend = document.querySelector('.chat-manager-controller').children[1].children[0];
+const enterSend = document.querySelector('.chat-manager-controller').children[0].children[0]
 let ChatManagerYou = document.querySelector('.chat-manager-header-user');
 let ChatDataObj = {
     receiverId: null
@@ -17,7 +18,7 @@ let ChatDataJSON;
 let CurrentChatData;
 let GetMessageData;
 const userID=document.querySelector('.chat-manager-user-id').innerHTML;
-const socket = io("http://localhost:8000")
+const socket = io(window.location.href.replace('/chats', ''))
 
 socket.on(`message:${userID}`, (data) => {
         console.log(data);
@@ -225,7 +226,16 @@ function getMessage(text, date, time, userRecipientId, userSenderID) {
 }
 
 // Отправка сообщения Frontend
+enterSend.addEventListener('keydown', (e)=>{
+    if(e.code === 'Enter'){
+        sendMessage();
+    }
+})
 ChatSend.addEventListener('click', () => {
+    sendMessage();
+})
+
+function sendMessage(){
     if(ChatField.value.length == 0){
         return;
     }
@@ -303,4 +313,4 @@ ChatSend.addEventListener('click', () => {
          }
         )
     }
-})
+}
